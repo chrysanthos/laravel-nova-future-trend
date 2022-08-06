@@ -20,7 +20,7 @@ abstract class FutureTrend extends Trend
 
         $timezone = Nova::resolveUserTimezone($request) ?? $request->timezone ?? config('app.timezone');
 
-        $expression = (string)TrendDateExpressionFactory::make(
+        $expression = (string) TrendDateExpressionFactory::make(
             $query, $dateColumn = $dateColumn ?? $query->getModel()->getQualifiedCreatedAtColumn(),
             $unit, $timezone
         );
@@ -33,7 +33,7 @@ abstract class FutureTrend extends Trend
         );
 
         $wrappedColumn = $column instanceof Expression
-            ? (string)$column
+            ? (string) $column
             : $query->getQuery()->getGrammar()->wrap($column);
 
         $results = $query
@@ -83,12 +83,12 @@ abstract class FutureTrend extends Trend
 
             case 'hour':
                 return with($now->addHours(24), function ($now) {
-                    return $now->setTimeFromTimeString($now->hour . ':00');
+                    return $now->setTimeFromTimeString($now->hour.':00');
                 });
 
             case 'minute':
                 return with($now->addMinutes(60), function ($now) {
-                    return $now->setTimeFromTimeString($now->hour . ':' . $now->minute . ':00');
+                    return $now->setTimeFromTimeString($now->hour.':'.$now->minute.':00');
                 });
 
             default:
