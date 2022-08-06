@@ -17,8 +17,6 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0|^8.1",
-        "illuminate/support": "^8.0",
         "laravel/nova": "~4.0"
     },
     "require-dev": {
