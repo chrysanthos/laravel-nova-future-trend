@@ -53,6 +53,6 @@ If you discover any security related issues, please email me@chrysanthos.xyz ins
 -   [Chrysanthos Prodromou](https://github.com/chrysanthos)
 -   [All Contributors](../../contributors)
 
-## License
+## Licence
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/chrysanthos/laravel-nova-future-trend) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
