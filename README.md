@@ -16,7 +16,7 @@ composer require chrysanthos/laravel-nova-future-trend
 
 ## Usage
 
-```php
+```bash
 php artisan nova:trend ScheduledMessagesTrend
 ```
 
