@@ -30,6 +30,9 @@ Extend the FutureTrend class instead of Nova's defualt Trend class.
 
 ```
 
+![Example image](https://chrysanthos.xyz/wp-content/uploads/2022/08/future-messages.png)
+
+
 ### Testing
 
 ```bash
