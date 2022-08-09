@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/chrysanthos/laravel-nova-future-trend.svg?style=flat-square)](https://packagist.org/packages/chrysanthos/laravel-nova-future-trend)
 ![GitHub Actions](https://github.com/chrysanthos/laravel-nova-future-trend/actions/workflows/main.yml/badge.svg)
 
-Laravel Nova includes a way to generate Trend metrics and display values over time via a line chart. It doesn't however offer a way to generate the future graphs starting from the current date . This packages allows you to generate the graph for the near future. 
+Laravel Nova includes a way to generate Trend metrics and display values over time via a line chart. It doesn't, however, offer a way to generate graphs for the future, starting from the current date. This package allows you to generate graphs for the near future. 
 
 ## Installation
 
@@ -20,7 +20,7 @@ composer require chrysanthos/laravel-nova-future-trend
 php artisan nova:trend ScheduledMessagesTrend
 ```
 
-Extend the FutureTrend class instead of Nova's defualt Trend class.
+Extend the FutureTrend class instead of Nova's default Trend class.
 ```diff
 - use Laravel\Nova\Metrics\Trend;
 - class FutureMessagesTrend extends Trend
