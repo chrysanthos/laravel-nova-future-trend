@@ -20,7 +20,7 @@ abstract class FutureTrend extends Trend
 
         $timezone = Nova::resolveUserTimezone($request) ?? $request->timezone ?? config('app.timezone');
 
-        $expression = (string) TrendDateExpressionFactory::make(
+        $expression = (string)TrendDateExpressionFactory::make(
             $query, $dateColumn = $dateColumn ?? $query->getModel()->getQualifiedCreatedAtColumn(),
             $unit, $timezone
         );
@@ -33,7 +33,7 @@ abstract class FutureTrend extends Trend
         );
 
         $wrappedColumn = $column instanceof Expression
-            ? (string) $column
+            ? (string)$column
             : $query->getQuery()->getGrammar()->wrap($column);
 
         $results = $query
@@ -64,31 +64,58 @@ abstract class FutureTrend extends Trend
 
     protected function getAggregateStartingDate($request, $unit, $timezone)
     {
-        return CarbonImmutable::now($timezone);
+        $now = CarbonImmutable::now($timezone);
+
+        switch ($unit) {
+            case 'month':
+                return $now->startOfMonth()->setTime(0, 0);
+
+            case 'week':
+                return $now->startOfWeek()->setTime(0, 0);
+
+            case 'day':
+                return $now->setTime(0, 0);
+
+            case 'hour':
+                return with($now->addHours(24), function ($now) {
+                    return $now->setTimeFromTimeString($now->hour . ':00');
+                });
+
+            case 'minute':
+                return with($now->addMinutes(60), function ($now) {
+                    return $now->setTimeFromTimeString($now->hour . ':' . $now->minute . ':00');
+                });
+
+            default:
+                throw new InvalidArgumentException('Invalid trend unit provided.');
+        }
+
     }
 
     protected function getEndingDate($request, $unit, $timezone)
     {
         $now = CarbonImmutable::now($timezone);
 
+        $range = $request->range;
+
         switch ($unit) {
             case 'month':
-                return $now->addMonthsWithoutOverflow(5)->firstOfMonth()->setTime(0, 0);
+                return $now->addMonthsWithoutOverflow($range / 30)->endOfMonth()->setTime(23, 59);
 
             case 'week':
-                return $now->addWeeks(5)->startOfWeek()->setTime(0, 0);
+                return $now->addWeeks($range / 7)->startOfWeek()->setTime(0, 0);
 
             case 'day':
-                return $now->addDays(30)->setTime(0, 0);
+                return $now->addDays($range)->setTime(0, 0);
 
             case 'hour':
                 return with($now->addHours(24), function ($now) {
-                    return $now->setTimeFromTimeString($now->hour.':00');
+                    return $now->setTimeFromTimeString($now->hour . ':00');
                 });
 
             case 'minute':
                 return with($now->addMinutes(60), function ($now) {
-                    return $now->setTimeFromTimeString($now->hour.':'.$now->minute.':00');
+                    return $now->setTimeFromTimeString($now->hour . ':' . $now->minute . ':00');
                 });
 
             default:
