@@ -74,7 +74,7 @@ abstract class FutureTrend extends Trend
                 return $now->startOfWeek()->setTime(0, 0);
 
             case 'day':
-                return $now->setTime(0, 0);
+                return $now->subDay()->setTime(0, 0);
 
             case 'hour':
                 return with($now->addHours(24), function ($now) {
