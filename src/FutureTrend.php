@@ -29,7 +29,8 @@ abstract class FutureTrend extends Trend
             $startingDate = $this->getAggregateStartingDate($request, $unit, $timezone),
             $endingDate = $this->getEndingDate($request, $unit, $timezone),
             $unit,
-            $request->twelveHourTime === 'true'
+            $request->twelveHourTime === 'true',
+            $request->range
         );
 
         $wrappedColumn = $column instanceof Expression
