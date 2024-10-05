@@ -96,7 +96,7 @@ abstract class FutureTrend extends Trend
     {
         $now = CarbonImmutable::now($timezone);
 
-        $range = (int)$request->range;
+        $range = (int) $request->range;
 
         switch ($unit) {
             case 'month':
